@@ -96,7 +96,12 @@ class SettingsList extends React.Component {
     let items;
     if (group.items.length > 0) {
       items = (
-        <View style={[borderStyle, { borderColor: this.props.borderColor }]}>
+        <View
+          style={[
+            this.props.borderStyle,
+            { borderColor: this.props.borderColor },
+          ]}
+        >
           {group.items.map((item, index) => {
             return this._itemView(item, index, group.items.length);
           })}
@@ -116,7 +121,12 @@ class SettingsList extends React.Component {
           >
             {group.header.headerText}
           </Text>
-          <View style={[borderStyle, { borderColor: this.props.borderColor }]}>
+          <View
+            style={[
+              this.props.borderStyle,
+              { borderColor: this.props.borderColor },
+            ]}
+          >
             {group.items.map((item, index) => {
               return this._itemView(item, index, group.items.length);
             })}
