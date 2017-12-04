@@ -1,7 +1,8 @@
 "use strict";
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 
 import {
   View,
@@ -12,7 +13,8 @@ import {
   TextInput,
   Switch,
   Image,
-} from "react-native";
+  ViewPropTypes
+} from 'react-native';
 
 const ARROW_ICON = require("./img/icon-arrow-settings.png");
 
@@ -45,20 +47,14 @@ class SettingsList extends React.Component {
     let headers = [];
     let itemGroup = [];
     let result = [];
-    let other = [];
-    React.Children.forEach(this.props.children, child => {
+    React.Children.forEach(this.props.children, (child) => {
       // Allow for null, optional fields
       if (!child) return;
 
-      if (child.type.displayName === "Header") {
-        if (groupNumber != -1) {
-          result[groupNumber] = {
-            items: itemGroup,
-            header: headers[groupNumber],
-            other: other,
-          };
+      if(child.type.displayName === 'Header'){
+        if(groupNumber != -1){
+          result[groupNumber] = {items: itemGroup, header: headers[groupNumber] };
           itemGroup = [];
-          other = [];
         }
         groupNumber++;
         headers[groupNumber] = child.props;
@@ -71,14 +67,10 @@ class SettingsList extends React.Component {
         if (groupNumber == -1) {
           groupNumber++;
         }
-        other.push(child);
+        itemGroup.push(child);
       }
     });
-    result[groupNumber] = {
-      items: itemGroup,
-      header: headers[groupNumber],
-      other: other,
-    };
+    result[groupNumber] = {items: itemGroup, header: headers[groupNumber] };
     return result;
   }
 
@@ -92,41 +84,12 @@ class SettingsList extends React.Component {
     );
   }
 
-  _groupView(group, index) {
-    let items;
-    if (group.items.length > 0) {
-      items = (
-        <View
-          style={[
-            this.props.borderStyle,
-            { borderColor: this.props.borderColor },
-          ]}
-        >
-          {group.items.map((item, index) => {
-            return this._itemView(item, index, group.items.length);
-          })}
-        </View>
-      );
-    }
-
-    if (group.header) {
+  _groupView(group, index){
+    if(group.header){
       return (
-        <View key={"group_" + index}>
-          {group.other}
-          <Text
-            style={[{ margin: 5 }, group.header.headerStyle]}
-            numberOfLines={group.header.headerNumberOfLines}
-            ellipsizeMode="tail"
-            ref={group.header.headerRef}
-          >
-            {group.header.headerText}
-          </Text>
-          <View
-            style={[
-              this.props.borderStyle,
-              { borderColor: this.props.borderColor },
-            ]}
-          >
+        <View key={'group_' + index}>
+          <Text style={[{margin:5},group.header.headerStyle]} numberOfLines={group.header.headerNumberOfLines} ellipsizeMode="tail" ref={group.header.headerRef}>{group.header.headerText}</Text>
+          <View style={{borderTopWidth:1, borderBottomWidth:1, borderColor: this.props.borderColor}}>
             {group.items.map((item, index) => {
               return this._itemView(item, index, group.items.length);
             })}
@@ -134,9 +97,19 @@ class SettingsList extends React.Component {
         </View>
       );
     } else {
+      let items;
+      if (group.items.length > 0) {
+        items = (
+          <View style={{borderTopWidth:1, borderBottomWidth:1, borderColor: this.props.borderColor}}>
+            {group.items.map((item, index) => {
+              return this._itemView(item,index, group.items.length);
+            })}
+          </View>
+        );
+      }
+
       return (
-        <View key={"group_" + index}>
-          {group.other}
+        <View key={'group_' + index}>
           {items}
         </View>
       );
@@ -200,17 +173,15 @@ class SettingsList extends React.Component {
 
   _itemView(item, index, max) {
     var border;
-    if (item.borderHide) {
-      switch (item.borderHide) {
-        case "Top":
-          border = {
-            borderBottomWidth: 1,
-            borderColor: this.props.borderColor,
-          };
-          break;
-        case "Bottom":
-          border = { borderTopWidth: 1, borderColor: this.props.borderColor };
-          break;
+
+    if (item.type && item.type.displayName) {
+        return item;
+    }
+
+    if(item.borderHide) {
+      switch(item.borderHide) {
+        case 'Top' : border = {borderBottomWidth:1, borderColor: this.props.borderColor}; break;
+        case 'Bottom' : border = {borderTopWidth:1, borderColor: this.props.borderColor}; break;
       }
     } else {
       border =
@@ -386,12 +357,12 @@ const styles = StyleSheet.create({
 /**
  * Optional Header for groups
  */
-SettingsList.Header = React.createClass({
+SettingsList.Header = createReactClass({
   propTypes: {
     headerText: PropTypes.string,
     headerStyle: Text.propTypes.style,
-    headerRef: React.PropTypes.func,
-    headerNumberOfLines: React.PropTypes.number,
+    headerRef: PropTypes.func,
+    headerNumberOfLines: PropTypes.number,
   },
   getDefaultProps() {
     return {
@@ -409,7 +380,7 @@ SettingsList.Header = React.createClass({
 /**
  * Individual Items in the Settings List
  */
-SettingsList.Item = React.createClass({
+SettingsList.Item = createReactClass({
   propTypes: {
     /**
      * Title being displayed
@@ -424,19 +395,19 @@ SettingsList.Item = React.createClass({
     /**
      * Item Box Style
      */
-    itemBoxStyle: View.propTypes.style,
+    itemBoxStyle : ViewPropTypes.style,
     /**
      * Title Box Style
      */
-    titleBoxStyle: View.propTypes.style,
+    titleBoxStyle: ViewPropTypes.style,
     /**
      * Right Side Style
      */
-    rightSideStyle: View.propTypes.style,
+    rightSideStyle: ViewPropTypes.style,
     /**
      * Editable Right Side Style
      */
-    editableTextStyle: View.propTypes.style,
+    editableTextStyle: Text.propTypes.style,
 
     /**
      * Individual item width.  Can be globally set in the parent.  Will become deprecated
@@ -504,7 +475,7 @@ SettingsList.Item = React.createClass({
     /* Gives opens to hide specific borders */
     borderHide: PropTypes.oneOf(["Top", "Bottom", "Both"]),
 
-    itemRef: React.PropTypes.func,
+    itemRef: PropTypes.func,
   },
   getDefaultProps() {
     return {

@@ -1,6 +1,6 @@
 {
   "name": "react-native-settings-list",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "A clean and highly customizable React Native implementation of a list of settings for a settings page.",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "react": ">=0.14.0"
   },
   "dependencies": {
+    "create-react-class": "^15.6.2",
     "prop-types": "^15.5.10"
   }
 }
