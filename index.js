@@ -22,6 +22,7 @@ class SettingsList extends React.Component {
   static propTypes = {
     backgroundColor: PropTypes.string,
     borderColor: PropTypes.string,
+    borderStyle: Text.propTypes.style,
     defaultItemSize: PropTypes.number,
     underlayColor: PropTypes.string,
     defaultTitleStyle: Text.propTypes.style,
@@ -32,6 +33,10 @@ class SettingsList extends React.Component {
   static defaultProps = {
     backgroundColor: "white",
     borderColor: "black",
+    borderStyle: {
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
+    },
     defaultItemSize: 50,
     underlayColor: "transparent",
     defaultTitleStyle: { fontSize: 16 },
@@ -173,9 +178,7 @@ class SettingsList extends React.Component {
           style={[
             item.rightSideStyle
               ? item.rightSideStyle
-              : position === "Bottom"
-                ? null
-                : styles.rightSide,
+              : position === "Bottom" ? null : styles.rightSide,
             { color: "#B1B1B1" },
             item.titleInfoStyle,
           ]}
