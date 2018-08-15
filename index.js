@@ -79,7 +79,7 @@ class SettingsList extends React.Component {
 
   render() {
     return (
-      <ScrollView {...this.props.scrollViewProps} ref="_scrollView">
+      <ScrollView {...this.props.scrollViewProps}>
         {this._getGroups().map((group, index) => {
           return this._groupView(group, index);
         })}
@@ -263,8 +263,7 @@ class SettingsList extends React.Component {
                   }}
                 >
                   <TextInput
-                    ref="UserNameInputBlock"
-                    onSubmitEditing={() => this.refs.PasswordInputBlock.focus()}
+                    onSubmitEditing={() => this.passwordInput.focus()}
                     style={{ flex: 1, height: 30, borderBottomWidth: 1 }}
                     placeholder="username"
                     {...item.authPropsUser}
@@ -272,7 +271,7 @@ class SettingsList extends React.Component {
                 </View>
                 <View>
                   <TextInput
-                    ref="PasswordInputBlock"
+                    ref={node => (this.passwordInput = node)}
                     style={{ flex: 1, height: 30 }}
                     placeholder="password"
                     secureTextEntry={true}
