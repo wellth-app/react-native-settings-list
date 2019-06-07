@@ -22,10 +22,10 @@ class SettingsList extends React.Component {
   static propTypes = {
     backgroundColor: PropTypes.string,
     borderColor: PropTypes.string,
-    borderStyle: Text.propTypes.style,
+    borderStyle: ViewPropTypes.style,
     defaultItemSize: PropTypes.number,
     underlayColor: PropTypes.string,
-    defaultTitleStyle: Text.propTypes.style,
+    defaultTitleStyle: ViewPropTypes.style,
     defaultTitleInfoPosition: PropTypes.string,
     scrollViewProps: PropTypes.object,
   };
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
 SettingsList.Header = createReactClass({
   propTypes: {
     headerText: PropTypes.string,
-    headerStyle: Text.propTypes.style,
+    headerStyle: ViewPropTypes.style,
     headerRef: PropTypes.func,
     headerNumberOfLines: PropTypes.number,
   },
@@ -410,7 +410,7 @@ SettingsList.Item = createReactClass({
      * Title being displayed
      */
     title: PropTypes.string,
-    titleStyle: Text.propTypes.style,
+    titleStyle: ViewPropTypes.style,
     /**
      * Icon displayed on the left of the settings item
      */
@@ -431,7 +431,7 @@ SettingsList.Item = createReactClass({
     /**
      * Editable Right Side Style
      */
-    editableTextStyle: Text.propTypes.style,
+    editableTextStyle: ViewPropTypes.style,
 
     /**
      * Individual item width.  Can be globally set in the parent.  Will become deprecated
@@ -466,7 +466,7 @@ SettingsList.Item = createReactClass({
     hasNavArrow: PropTypes.bool,
     arrowIcon: PropTypes.node,
 
-    arrowStyle: Image.propTypes.style,
+    arrowStyle: ViewPropTypes.style,
     /**
      * Enable or disable a Switch component
      */
@@ -487,7 +487,7 @@ SettingsList.Item = createReactClass({
      * Right side information on the setting item
      */
     titleInfo: PropTypes.string,
-    titleInfoStyle: Text.propTypes.style,
+    titleInfoStyle: ViewPropTypes.style,
     /**
      * If 'Bottom', info is placed beneath the title
      */
