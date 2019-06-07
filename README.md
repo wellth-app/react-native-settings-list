@@ -73,7 +73,7 @@ The following props are used:
 | Name        | Description                             | Type                   |
 |-------------|-----------------------------------------|------------------------|
 | headerText  | Text for the header                     | React.PropTypes.string |
-| headerStyle | Sets border color for the settings list | Text.propTypes.style   |
+| headerStyle | Sets border color for the settings list | ViewPropTypes.style   |
 | headerRef   | Sets a `ref` on the header component    | React.PropTypes.func   |
 
 ### <a name='sli'>\<SettingsList.Item></a>
@@ -82,20 +82,20 @@ The following props are used:
 | Name                | Description                                                                                              | Type                   |
 |---------------------|----------------------------------------------------------------------------------------------------------|------------------------|
 | title               | Text for the item                                                                                        | React.PropTypes.string |
-| titleStyle          | Text Style                                                                                               | Text.propTypes.style   |
+| titleStyle          | Text Style                                                                                               | ViewPropTypes.style   |
 | icon                | A component for the icon.  Doesn't need to be an image                                                   | React.PropTypes.node   |
 | itemWidth           | Changes the individual item's width.  Overwrites **\<SettingsLists>** defaultItemSize                    | React.PropTypes.number |
 | backgroundColor     | Changes the individual item's background color.  Overwrites default **\<SettingsList>** backgroundColor  | React.PropTypes.string |
 | underlayColor       | Changes the individual item's underlayColor color.  Overwrites default **\<SettingsList>** underlayColor | React.PropTypes.string |
 | onPress             | On press Callback for item [used for auth callback as well]                                              | React.PropTypes.func   |
 | hasNavArrow         | Displays a navigation arrow                                                                              | React.PropTypes.bool   |
-| arrowStyle          | Style for the navigation arrow                                                                           | Image.propTypes.style  |
+| arrowStyle          | Style for the navigation arrow                                                                           | ViewPropTypes.style  |
 | arrowIcon           | Inject custom arrow into the end of the item                                                             | React.PropTypes.node   |
 | hasSwitch           | Enable a switch component                                                                                | React.PropTypes.bool   |
 | switchProps         | RN switch props                                                                                          | React.PropTypes.object |
 | switchOnValueChange | On switches value change callback                                                                        | React.PropTypes.func   |
 | titleInfo           | Right side title information string                                                                      | React.PropTypes.string |
-| titleInfoStyle      | Style for title information string                                                                       | Text.propTypes.style   |
+| titleInfoStyle      | Style for title information string                                                                       | ViewPropTypes.style   |
 | isAuth              | Sets item as an authorization item                                                                       | React.PropTypes.bool   |
 | authPropsUser       | Changes the props for the first TextInput component; overwrites default                                  | React.PropTypes.node   |
 | authPropsPW         | Changes the props for the second TextInput component; overwrites default                                 | React.PropTypes.node   |
